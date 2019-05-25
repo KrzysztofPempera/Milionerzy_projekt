@@ -85,8 +85,10 @@ class mechanizm():
             self.score += 1
             print(self.score)
             print("Znakomicie,",self.number_question,"pytanie za nami.")
+        ##K: I've changed this if. Now, user know which answer was correct.
         if self.answer_ans != self.odp:
-            print("Niestety to koniec naszej gry, do zobaczenia!")
+            print("To nie była prawidłowa odpowiedź, gdybyś wybrał/a odpowiedź:",self.answer_ans.upper(),"- To nasz przygoda trwałaby dłużej. ")
+            print("Niestety to koniec naszej gry, spróbuj ponownie!")
             print("Twoja wygrana wynosi:", self.guaranted_cash)
             sys.exit(0)
 
