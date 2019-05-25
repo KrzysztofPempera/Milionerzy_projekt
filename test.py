@@ -18,7 +18,7 @@ class mechanizm():
 
     print("Witamy w milionerach!")
 
-
+    ##test asdfasdf
 
 
     def __init__(self):
