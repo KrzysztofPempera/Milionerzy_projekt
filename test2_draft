@@ -1,4 +1,5 @@
-##wersja niedokończona
+##draft
+##K: I must change draw mechanism cos we have problem when with same letters.
 import random
 import sys
 class mechanizm():
@@ -45,20 +46,33 @@ class mechanizm():
         self.stan_konta = 0
         self.odp = ""
         self.number_question = 0
-        self.score = int(0)
+        self.score = 0
         self.guaranted_cash = 0
 
 
 
     def random_question(self):
-        self.random = random.choice(self.question_base_easy)
-        self.position = self.question_base_easy.index(self.random)
-        self.question_ans = self.question_base_easy[self.position]
-        self.answer_ans = self.answer_base_easy[self.position]
-        print(self.score)
-
-
-
+        if self.score == 0 or self.score == 1 or self.score == 2 or self.score == 3:
+            self.random = random.choice(self.question_base_easy)
+            self.position = self.question_base_easy.index(self.random)
+            self.position2 = self.question_base_easy.index(self.random)
+            self.question_ans = self.question_base_easy[self.position]
+            self.answer_ans = self.answer_base_easy[self.position2]
+            print(self.position)
+            print(self.position2)
+        if self.score == 4 or self.score == 5 or self.score == 6 or self.score == 7:
+            self.random = random.choice(self.question_base_medium)
+            self.position = self.question_base_medium.index(self.random)
+            self.position2 = self.question_base_medium.index(self.random)
+            self.question_ans = self.question_base_medium[self.position]
+            self.answer_ans = self.answer_base_medium[self.position2]
+            print(self.random)
+            print(self.position)
+        if self.score == 8 or self.score == 9 or self.score == 10 or self.score == 11:
+            self.random = random.choice(self.question_base_hard)
+            self.position = self.question_base_hard.index(self.random)
+            self.question_ans = self.question_base_hard[self.position]
+            self.answer_ans = self.answer_base_hard[self.position]
 
     def interview(self):
         print("Proszę przedstaw nam się!")
@@ -76,16 +90,14 @@ class mechanizm():
 
 
     def answer(self):
-        self.odp = input("Podaj odpowiedź: \n")
+        self.odp = input("Podaj odpowiedź: \n").lower()
 
 
 
     def check_answer(self):
         if self.answer_ans == self.odp:
             self.score += 1
-            print(self.score)
             print("Znakomicie,",self.number_question,"pytanie za nami.")
-        ##K: I've changed this if. Now, user know which answer was correct.
         if self.answer_ans != self.odp:
             print("To nie była prawidłowa odpowiedź, gdybyś wybrał/a odpowiedź:",self.answer_ans.upper(),"- To nasz przygoda trwałaby dłużej. ")
             print("Niestety to koniec naszej gry, spróbuj ponownie!")
@@ -130,10 +142,23 @@ class mechanizm():
 
 
     def question_remove(self):
-        self.question_base_easy.remove(self.question_base_easy[self.position])
-        self.answer_base_easy.remove(self.answer_base_easy[self.position])
-
-
+        if self.score == 0 or self.score == 1 or self.score == 2 or self.score == 3:
+            self.question_base_easy.remove(self.question_base_easy[self.position])
+            self.answer_base_easy.remove(self.answer_base_easy[self.position2])
+            print(self.random)
+            print(self.position)
+            print(self.question_base_easy)
+            print(self.answer_base_easy)
+        if self.score == 4 or self.score == 5 or self.score == 6 or self.score == 7:
+            self.question_base_medium.remove(self.question_base_medium[self.position])
+            self.answer_base_medium.remove(self.answer_base_medium[self.position2])
+            print(self.random)
+            print(self.position)
+            print(self.question_base_medium)
+            print(self.answer_base_medium)
+        if self.score == 8 or self.score == 9 or self.score == 10 or self.score == 11:
+            self.question_base_hard.remove(self.question_base_hard[self.position])
+            self.answer_base_hard.remove(self.answer_base_hard[self.position])
 
 
 
@@ -178,6 +203,8 @@ while True:
     gracz.bank()
     gracz.user_decision()
     gracz.question_remove()
+
+
 
 
 
