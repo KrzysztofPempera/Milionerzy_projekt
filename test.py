@@ -1,4 +1,5 @@
 ##wersja niedokończona
+## KP - i dont think game mechanizm should be a class, we dont really gain anything from that apart from a lot of self variables, we could turn questions and a player into a class  
 import random
 import sys
 class mechanizm():
@@ -10,15 +11,16 @@ class mechanizm():
                           "Nadworny błazen Zygmunta Starego to:\n A) Michał\n B) Lisowczyk\n C) Sebastian\n D) Stańczyk"
                           ]
     answer_base_easy = ["a", "a", "c", "c", "b", "d"  ]
-    question_base_medium = ["abc", "adk"]
-    answer_base_medium = ["lol", "lep"]
+    ##Those two arrays are unused
+    ##question_base_medium = ["abc", "adk"]
+    ##answer_base_medium = ["lol", "lep"]
     small_talk = ["Cieszę się, że mamy możliwość gościć Cię w naszym programie", "Bardzo dobrze Ci idzie.",
 "Zbliżamy się do miliona",
                 "Oby tak dalej."]
 
     print("Witamy w milionerach!")
 
-
+   
 
 
     def __init__(self):
@@ -33,6 +35,7 @@ class mechanizm():
     def random_question(self):
         self.random = random.choice(self.question_base_easy)
         self.position = self.question_base_easy.index(self.random)
+        ##self.question_ans is the exact same variable as self.random
         self.question_ans = self.question_base_easy[self.position]
         self.answer_ans = self.answer_base_easy[self.position]
 
@@ -58,6 +61,7 @@ class mechanizm():
 
 
     def check_answer(self):
+        ##games doesnt differentiate between lower and upper case letters, thus using upper case ends up being an incorrect answer 
         if self.answer_ans == self.odp:
             self.score += 1
             print(self.score)
@@ -65,11 +69,13 @@ class mechanizm():
         if self.answer_ans != self.odp:
             print("Niestety to koniec naszej gry, do zobaczenia!")
             print("Twoja wygrana wynosi:", self.guaranted_cash)
-
+            ##game shouldnt allow player to continue when they lost, it should jump to some kind of ending 
         small_talk_random = random.randint(0,2)
         if small_talk_random == 1:
             print(random.choice(self.small_talk))
 
+    ##this part needs to be completely rewritten, a simple array which contents are accordingly assigned prizes bank = [500,1000] i think is a good solution
+    ##guaranted_cash could be a different function or also an array 
     def bank(self):
         if self.score == 1:
             self.stan_konta = "500"
@@ -119,7 +125,7 @@ class player_menu(mechanizm):
         phone_friend = input()
         if phone_friend == "p":
             print("Myślę, że poprawna odpowiedź to odpowiedź", self.mechanizm.random_question(answer_ans))
-
+    
     def user_decision(self):
         print("Aby kontynuować kliknij 'x'\n",
               "Aby zakończyć klinij 'e'\n"
