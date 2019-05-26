@@ -87,13 +87,13 @@ class mechanizm():
         com = input()
         print("Jeśli",com,", to zaczynajmy!")
 
-    
+    ##K: This def counts questions and print random question
     def question(self):
         self.number_question += 1
         print("Oto", self.number_question,"pytanie.")
         return print(self.question_ans)
 
-
+    ##K: In this def user give an answer 
     def answer(self):
         self.odp = input("Podaj odpowiedź: \n").lower()
         print("Czy jesteś pewny swojej odpowiedzi, jest ona definitywna?")
@@ -103,21 +103,23 @@ class mechanizm():
             print("")
 
 
-
+    ##K: This def check if the users answer is correct.
+    ##K: First IF is for correct answers.
     def check_answer(self):
         if self.answer_ans == self.odp:
             self.score += 1
             print("Znakomicie,",self.number_question,"pytanie za nami.")
+    ##K: Second IF is for incorrect answers.
         if self.answer_ans != self.odp:
             print("To nie była prawidłowa odpowiedź, gdybyś wybrał/a odpowiedź:",self.answer_ans.upper(),"- To nasz przygoda trwałaby dłużej. ")
             print("Niestety to koniec naszej gry, spróbuj ponownie!")
             print("Twoja wygrana wynosi:", self.guaranted_cash)
             sys.exit(0)
-
+       
         small_talk_random = random.randint(0,2)
         if small_talk_random == 1:
             print(random.choice(self.small_talk))
-
+    ##K: This def add cash for user and print informations about guarantee point and account balance.
     def bank(self):
         if self.score == 1:
             self.stan_konta = "500"
@@ -152,7 +154,7 @@ class mechanizm():
         print("Obecnia na swoim koncie masz", self.stan_konta,"zł.")
 
 
-
+    ## This def remove questions and answers in basic lists.
     def question_remove(self):
         if self.score == 0 or self.score == 1 or self.score == 2 or self.score == 3:
             self.question_base_easy.remove(self.question_base_easy[self.position])
@@ -166,7 +168,7 @@ class mechanizm():
             self.question_base_hard.remove(self.question_base_hard[self.position])
             self.answer_base_hard.remove(self.answer_base_hard[self.position])
 
-
+    ##K: Lifebuoy: audience
     def audience(self):
         self.results = []
         self.base = ("a", "b", "c", "d")
@@ -198,7 +200,7 @@ class mechanizm():
 
 
 
-
+##K: Class which dispaly user menu.
 class player_menu(mechanizm):
 
 
