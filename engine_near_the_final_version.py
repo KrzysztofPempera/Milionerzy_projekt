@@ -56,6 +56,7 @@ class mechanizm():
         ["A) Minimalizm", "B) Impresjonizm", "C) Dadaizm", "D) Ekspresjonizm"],
         ["A) łodzie", "B) węże", "C) pająki", "D) krokodyle"],
         ["A) do latania", "B) szybszego wypijania płynów", "C) oddychania pod wodą", "D) nawoływania kaczek"],
+        ["A) 1948", "B) 1969", "C) 1950", "D) 1958"],
         ["A) połączone z kapeluszem", "B) z wilczej skóry", "C) połączone ze spodniami", "D) na koturnach"],
         ["A) w San Francisco", "B) w Chicago", "C) w Londynie", "D) w Nowym Jorku"]]
 
@@ -63,7 +64,8 @@ class mechanizm():
 
     ##K: Basic variables
     def __init__(self):
-        self.end = False
+        self.loss = False
+        self.last_score = score 
     ##K: This def draw question and choose correct answer from list
 
     def random_question(self):
@@ -90,9 +92,10 @@ class mechanizm():
     def check_answer(self,ans):
         global score
         if self.answer_ans == ans:
+            self.last_score = score
             score = score + 1
         elif self.answer_ans != ans:
-            self.end = True
+            self.loss = True
 
     def bank(self):
         global stan_konta
@@ -107,20 +110,21 @@ class mechanizm():
             guaranted_cash = "1 000 000$"
 
     def question_remove(self):
-        if score >= 0  and score <= 3:
+        if self.last_score >= 0  and self.last_score <= 3:
             self.question_base_easy.remove(self.question_base_easy[self.position])
             del self.question_answer_base_easy[self.position]
             self.answer_base_easy.remove(self.answer_base_easy[self.position])
 
-        if score >= 4  and score <= 7:
+        if self.last_score >= 4  and self.last_score <= 7:
             self.question_base_medium.remove(self.question_base_medium[self.position])
             del self.question_answer_base_medium[self.position]
             self.answer_base_medium.remove(self.answer_base_medium[self.position])
 
-        if score >= 8  and score <= 11:
+        if self.last_score >= 8  and self.last_score <= 11:
             self.question_base_hard.remove(self.question_base_hard[self.position])
             del self.question_answer_base_hard[self.position]
             self.answer_base_hard.remove(self.answer_base_hard[self.position])
+
     def scoreCheck(self):
         return score
     def stan_kontaCheck(self):

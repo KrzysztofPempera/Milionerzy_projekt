@@ -43,8 +43,10 @@ class Window(Frame):
 
     def answerButtonClick(self,master,ans):        ##method setting up answer button mechanics
         engine.check_answer(ans)
-        if (engine.end == True):
+        if (engine.loss == True):
             self.loosingScreen(master)
+        elif engine.scoreCheck() == 12:
+            self.winningScreen(master)
         else:
             engine.questionFunction()
             engine.bank()
@@ -77,7 +79,28 @@ class Window(Frame):
         self.question_frame.insert(0,question_frame_change)  ##inserting new text      
         self.question_frame.configure(state="disabled")      ##locking question frame
 
-    def loosingScreen(self,master):     ##method which shows ending screen after engines loss
+    def winningScreen(self,master):     ##method which shows ending screen after player wins
+        self.A_button.destroy()
+        self.B_button.destroy()
+        self.C_button.destroy()
+        self.D_button.destroy()
+        self.phone_button.destroy()
+        self.public_button.destroy()            ##deleting all widgets from main frame
+        self.fifty_button.destroy()
+        self.prize_value_frame.destroy()
+        self.guaranteed_prize_value_frame.destroy()
+        self.question_tag_label.destroy()
+        self.question_tag_number.destroy()
+        self.question_frame.destroy()
+
+        self.winning_score_screen_label = Label(master,font=("TimesNewRoman",25),text ="GRATULACJE\n WYGRAŁEŚ 1 000 000$")
+        self.winning_score_screen_label.place(x=200, y= 200)
+        
+
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
+        self.quit_button.pack(side=BOTTOM)
+
+    def loosingScreen(self,master):     ##method which shows ending screen after players loss
         self.A_button.destroy()
         self.B_button.destroy()
         self.C_button.destroy()
