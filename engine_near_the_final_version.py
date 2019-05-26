@@ -133,5 +133,7 @@ class mechanizm():
         return number_question
     def guaranted_cashCheck(self):
         return guaranted_cash
+    def answerCheck(self):
+        return self.answer_ans
 
 

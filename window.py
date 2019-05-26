@@ -1,12 +1,14 @@
 from tkinter import *
 from engine_near_the_final_version import *
 from basic_var import *
+import random
 
 ##main interface class
 class Window(Frame):
 
     def __init__(self, master):     ##interface class constructor
         Frame.__init__(self,master)
+
 
         self.master.title("MILIONERZY")     ##setting window title
 
@@ -41,7 +43,7 @@ class Window(Frame):
     def questionTagNumberEdit(self,question_tag_number_change):     #changing question indicator 
         self.question_tag_number.config(text=question_tag_number_change)
 
-    def answerButtonClick(self,master,ans):        ##method setting up answer button mechanics
+    def answerButtonClick(self,master,ans):        ##method setting up answer button mechanics and looping game 
         engine.check_answer(ans)
         if (engine.loss == True):
             self.loosingScreen(master)
@@ -70,8 +72,8 @@ class Window(Frame):
             self.C_button.config(text =engine.question_answer_base_hard[engine.position][2])
             self.D_button.config(text =engine.question_answer_base_hard[engine.position][3])  
 
-    def changeButtonStyle(self,button_change):        ##method to change button appearance via button press        
-        button_change.config(bg = "red")
+    def changeButtonStyle(self,button_change,colour):        ##method to change button appearance via button press        
+        button_change.config(bg = colour)
 
     def questionFrameEdit(self,question_frame_change):      ##method to change question frame text via button press
         self.question_frame.configure(state="normal")        ##unlocking question frame
@@ -141,13 +143,13 @@ class Window(Frame):
         self.D_button = Button(master, text="NICE",  bg="lightblue",command=lambda: self.answerButtonClick(master,3))
         self.D_button.place(x=325, y=225, width=225, height=75,)
         
-        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button)])
+        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button,"red")])
         self.phone_button.place(x=50, y=450, width=200, height=75,)
     
-        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button)])
+        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red")])
         self.public_button.place(x=275, y=450, width=200, height=75,)
 
-        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button)] )
+        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button,"red")])
         self.fifty_button.place(x=500, y=450, width=200, height=75,)
         
     def initScoreScreen(self,master):       ##method to create score screen
@@ -163,6 +165,7 @@ class Window(Frame):
 
     def windowExit(self):       ##method which exits the game
        exit()
+
 
 temp1 = "TEMP BUTTON"
 root = Tk()

@@ -1,39 +1,37 @@
-'''
-from sys import version_info
-if version_info.major == 2:
-    import Tkinter as tk
-elif version_info.major == 3:
-    import tkinter as tk
+import random
+
+
+answers = ["a","b","c","d"]
+correct_answer_index = 0
+
+def fifty_fifty():
+    correct_answer = answers[correct_answer_index]
+
+    answers.remove(answers[correct_answer_index])
     
+    second_answer = answers[random.randint(0,2)]    
 
-    
-app = tk.Tk()
-labelExample = tk.Button(app, text="0")
+    new_answers = []
 
-def change_label_number(num):
-    counter = int(str(labelExample['text']))
-    counter += num
-    labelExample.config(text=str(counter))
-    
-buttonExample = tk.Button(app, text="Increase", width=30,
-                          command=lambda: change_label_number(2))
+    new_answers.append(correct_answer)
+    new_answers.append(second_answer)
 
-buttonExample.pack()
-labelExample.pack()
-app.mainloop()
+    print(new_answers)
 
-while True:
-    player.random_question()
-    player.question()
-    player.answer()
-    player.check_answer()
-    player.bank()
-    player.question_remove()
-'''
-from basic_var import *
-a = 1
-b = 1
-if a  == b :
-    score += 1
+def phone():
+    correct_chance = random.randint(0,100)
 
-print(score)
+    if correct_chance>40:
+        print(answers[correct_answer_index])
+    elif correct_chance<60:
+        print(answers[random.randint(0,2)])
+
+def public():
+    percentage = 100
+    for i in range(len(answers)):
+        n = random.randrange(percentage)
+        print(n,"% publiczności, twierdzi że odpowiedź ",answers[i]," jest poprawna")
+        percentage = percentage - n
+##fifty_fifty()
+##phone()
+##public()
