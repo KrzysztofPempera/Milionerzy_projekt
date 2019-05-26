@@ -1,10 +1,10 @@
 from tkinter import *
 from engine_near_the_final_version import *
+from basic_var import *
 
 ##main interface class
 class Window(Frame):
 
-    
     def __init__(self, master):     ##interface class constructor
         Frame.__init__(self,master)
 
@@ -30,13 +30,13 @@ class Window(Frame):
         engine.random_question()
 
         self.questionFrameEdit(engine.question)
-        self.questionTagNumberEdit(engine.number_question+1)
+        self.questionTagNumberEdit(engine.number_questionChcek()+1)
         self.scoreScreenSet()
         self.answerButtonSet()
 
     def scoreScreenSet(self):       ##setting score screen
-        self.prize_value.config(text=engine.stan_konta)
-        self.guaranteed_prize_value.config(text = engine.guaranted_cash)
+        self.prize_value.config(text=engine.stan_kontaCheck())
+        self.guaranteed_prize_value.config(text = engine.guaranted_cashCheck())
 
     def questionTagNumberEdit(self,question_tag_number_change):     #changing question indicator 
         self.question_tag_number.config(text=question_tag_number_change)
@@ -46,23 +46,23 @@ class Window(Frame):
         if (engine.end == True):
             self.loosingScreen(master)
         else:
-            engine.question()
+            engine.questionFunction()
             engine.bank()
             engine.question_remove()
             self.setGame(master)
 
     def answerButtonSet(self):      ##setting buttons with answers
-        if engine.score >= 0  and engine.score <= 3:
+        if engine.scoreCheck() >= 0  and engine.scoreCheck() <= 3:
             self.A_button.config(text =engine.question_answer_base_easy[engine.position][0])
             self.B_button.config(text =engine.question_answer_base_easy[engine.position][1])
             self.C_button.config(text =engine.question_answer_base_easy[engine.position][2])
             self.D_button.config(text =engine.question_answer_base_easy[engine.position][3])
-        elif engine.score >= 4  and engine.score <= 7:
+        elif engine.scoreCheck() >= 4  and engine.scoreCheck() <= 7:
             self.A_button.config(text =engine.question_answer_base_medium[engine.position][0])
             self.B_button.config(text =engine.question_answer_base_medium[engine.position][1])
             self.C_button.config(text =engine.question_answer_base_medium[engine.position][2])
             self.D_button.config(text =engine.question_answer_base_medium[engine.position][3])
-        elif engine.score >= 8  and engine.score <= 11:
+        elif engine.scoreCheck() >= 8  and engine.scoreCheck() <= 11:
             self.A_button.config(text =engine.question_answer_base_hard[engine.position][0])
             self.B_button.config(text =engine.question_answer_base_hard[engine.position][1])
             self.C_button.config(text =engine.question_answer_base_hard[engine.position][2])
@@ -97,7 +97,7 @@ class Window(Frame):
         self.loosing_score_screen = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text ="Otrzymujesz nagrodę w wyskokości:")      ##displaying engines score
         self.loosing_score_screen.pack(side=TOP)
 
-        self.loosing_score_screen_price = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text =engine.guaranted_cash)
+        self.loosing_score_screen_price = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text =engine.guaranted_cashCheck())
         self.loosing_score_screen_price.pack(side=TOP)
 
         

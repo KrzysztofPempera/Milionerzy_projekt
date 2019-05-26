@@ -30,9 +30,10 @@ while True:
     player.bank()
     player.question_remove()
 '''
-array = [[1,2,3],[2,3,4],[4,5,6]]
+from basic_var import *
+a = 1
+b = 1
+if a  == b :
+    score += 1
 
-print(array)
-
-del array[0]
-print(array)
+print(score)
