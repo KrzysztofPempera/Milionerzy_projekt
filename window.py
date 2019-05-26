@@ -25,8 +25,8 @@ class Window(Frame):
     def changeTestLabel(self,n):        ##method to change test? note via button press
         self.e2.config(text =n)
 
-    def changeButtonStyle(self):        ##method to change button appearance via button press        
-        self.A_button.config(bg = "red")
+    def changeButtonStyle(self,button_change):        ##method to change button appearance via button press        
+        button_change.config(bg = "red")
 
     def questionFrameEdit(self,question_frame_change):      ##method to change question frame text via button press
         self.entry.configure(state="normal")        ##unlocking question frame
@@ -49,32 +49,36 @@ class Window(Frame):
 
         self.loosing_score_screen_frame = LabelFrame(master,font =("TimesNewRoman",25),text = "Przegrałeś")
         self.loosing_score_screen_frame.place(x=150, y=100,width=500,height = 300)
+        
         self.loosing_score_screen = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text ="Otrzymujesz nagrodę w wyskokości:")      ##displaying players score
         self.loosing_score_screen.pack(side=TOP)
+
         self.loosing_score_screen_price = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text =temp1)
         self.loosing_score_screen_price.pack(side=TOP)
 
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
+        self.quit_button.pack(side=BOTTOM)
 
     def initButtons(self,master):       ##method to create buttons 
-        self.A_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.changeTestLabel("all your base belong to us"))
+        self.A_button = Button(master, text=temp1,  bg="lightblue")
         self.A_button.place(x=50, y=125, width=225, height=75,)
     
-        self.B_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.changeTestLabel("all your base are belong to us"))
+        self.B_button = Button(master, text=temp1,  bg="lightblue")
         self.B_button.place(x=325, y=125, width=225, height=75,)
 
-        self.C_button = Button(master, text=temp1,  bg="lightblue",command=lambda: [self.changeButtonStyle(), self.changeTestLabel("all your base are belong to us")])
+        self.C_button = Button(master, text=temp1,  bg="lightblue")
         self.C_button.place(x=50, y=225, width=225, height=75,)
 
-        self.D_button = Button(master, text="NICE",  bg="lightblue", command=lambda: self.questionFrameEdit("NICE"))
+        self.D_button = Button(master, text="NICE",  bg="lightblue", command=lambda: self.loosingScreen(master))
         self.D_button.place(x=325, y=225, width=225, height=75,)
         
-        self.phone_button = Button(master, text=temp1,  bg="lightblue")
+        self.phone_button = Button(master, text=temp1,  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button)])
         self.phone_button.place(x=50, y=450, width=200, height=75,)
     
-        self.public_button = Button(master, text=temp1,  bg="lightblue")
+        self.public_button = Button(master, text=temp1,  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button)])
         self.public_button.place(x=275, y=450, width=200, height=75,)
 
-        self.fifty_button = Button(master, text="SUDO rm -rf /*",  bg="lightblue", command=lambda: self.loosingScreen(master))
+        self.fifty_button = Button(master, text="SUDO rm -rf /*",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button)] )
         self.fifty_button.place(x=500, y=450, width=200, height=75,)
         
     def initScoreScreen(self,master):       ##method to create score screen
@@ -88,7 +92,10 @@ class Window(Frame):
         self.guaranteed_prize_value = Label(self.guaranteed_prize_value_frame,font=("TimesNewRoman",15),text ="1000$")
         self.guaranteed_prize_value.pack()
 
-temp1 = "COrrrect"
+    def windowExit(self):       ##method which exits game
+       exit()
+
+temp1 = "TEMP BUTTON"
 root = Tk()
 root.geometry("800x600")
 root.resizable(0, 0)
