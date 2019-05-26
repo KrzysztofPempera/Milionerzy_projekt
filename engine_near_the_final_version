@@ -1,243 +1,139 @@
+##tomorrow, I will add comments and do little changes
 import random
 import sys
-import time
-
+from basic_var import *
 
 class mechanizm():
-    ##K: answers must be sorted from a to d, so questions too.
+    ## answers must be sorted from a to d, so questions too.
     question_base_easy = [
-        "Jaka jest nazwa słodkiej substancji, które wiele owadów uzyskuje z kwiatów?\n A) nektar\n B) syrop klonowy\n C) pyłek\n D) syrop kwiatowy\n",
-        "Helsinki są stolicą jakiego kraju?\n A) Finlandii\n B) Islandii\n C) Estonii\n D) Rumunii",
-        "Jak nazywa się stolica Madagaskaru?\n A) Antananarywa\n B) Madagaskar\n C) Lemir\n D) Berno",
-        "Jak nazywa się mikroskopijny organizm wodny, który zawiera tylko jedną komórkę?\n A) ameba\n B) amfibia\n C) skrzek\n D) cellulit",
-        "Jak poprawnie brzmi nazwa rockowego zespołu z Anglii?\n A) Radiobed\n B) Radiohell\n C) Radiohead\n D) Radiohide",
-        "Ten owoc podzielony jest na sekcje, wewnątrz których jest masa wypełnionych sokiem pęcherzyków:\n A) wiśnia\n B) czereśnia\n C) nektarynka\n D) mandarynka",
+        "Jaka jest nazwa słodkiej substancji, które wiele owadów uzyskuje z kwiatów?",
+        "Helsinki są stolicą jakiego kraju?",
+        "Jak nazywa się stolica Madagaskaru?",
+        "Jak nazywa się mikroskopijny organizm wodny, który zawiera tylko jedną komórkę?",
+        "Jak poprawnie brzmi nazwa rockowego zespołu z Anglii?",
+        "Ten owoc podzielony jest na sekcje, wewnątrz których jest masa wypełnionych sokiem pęcherzyków:",
 
     ]
-    answer_base_easy = ["a", "a", "a", "a", "c", "d"]
+    question_answer_base_easy = [
+        ["A) nektar","B) syrop klonowy","C) pyłek","D) syrop kwiatowy"],
+        ["A) Finlandii","B) Islandii", "C) Estonii", "D) Rumunii"],
+        ["A) Antananarywa","B) Madagaskar", "C) Lemir", "D) Berno"],
+        ["A) ameba", "B) amfibia", "C) skrzek", "D) cellulit"],
+        ["A) Radiobed", "B) Radiohell", "C) Radiohead", "D) Radiohide"],
+        ["A) wiśnia", "B) czereśnia", "C) nektarynka", "D) mandarynka"]]
+
+    answer_base_easy = [0, 0, 0, 0, 2, 3]
 
     question_base_medium = [
-        "Jaka siła spowalnia toczenie się piłki?\n A) tarcie\n B) dynamiczna\n C) funkcyjna\n D) odśrodkowa",
-        "Jaki instrument znajduje się w meksykańskich zespołach mariachi?\n A) fortepian\n B) trąbka\n C) wiolonczela\n D) tuba",
-        "Co bada się za pomocą tablicy Snellena?\n A) pojemność płuc\n B) masa ciała\n C) wzrok\n D) słuch",
-        "Jak nazywa się kraj, którego epopeja narodowa nosi tytuł “Mobinogion?”\n A) Holandia\n B) Irlandia\n C) Walia\n D) Niemcy",
-        "Co utrzymuje się z surówki w procesie świeżenia?\n A) zdrowy dodatek do schabowego\n B) tkaninę w kolorze czerwonym\n C) stal\n D) materiał filmowy do montażu",
-        "W czym tradycyjnie mieszkają ludy koczownicze w środkowej Azji?\n A) duryt\n B) kurta\n C) foliał\n D) jurta",
+        "Jaka siła spowalnia toczenie się piłki?",
+        "Jaki instrument znajduje się w meksykańskich zespołach mariachi?",
+        "Co bada się za pomocą tablicy Snellena?",
+        "Jak nazywa się kraj, którego epopeja narodowa nosi tytuł “Mobinogion?”",
+        "Co utrzymuje się z surówki w procesie świeżenia?",
+        "W czym tradycyjnie mieszkają ludy koczownicze w środkowej Azji?",
     ]
-    answer_base_medium = ["a", "b", "c", "c", "c", "d"]
+    question_answer_base_medium = [
+        ["A) tarcie", "B) dynamiczna", "C) funkcyjna", "D) odśrodkowa"],
+        ["A) fortepian", "B) trąbka", "C) wiolonczela", "D) tuba"],
+        ["A) pojemność płuc", "B) masa ciała", "C) wzrok", "D) słuch"],
+        ["A) Holandia", "B) Irlandia", "C) Walia", "D) Niemcy"],
+        ["A) zdrowy dodatek do schabowego", "B) tkaninę w kolorze czerwonym", "C) stal", "D) materiał filmowy do montażu"],
+        ["A) duryt", "B) kurta", "C) foliał", "D) jurta"]]
+
+    answer_base_medium = [0, 1, 2, 2, 2, 3]
 
     question_base_hard = [
-        "Jak Shakespear nazywa pierwszy akt w “Cały Świat to Scena?\n A) Podeszły wiek\n B) Dzieciństwo\n C) Dojrzałość\n D) Dorosłość",
-        "Monet, Renior i Degas, wszyscy należeli do którego ruchu artystycznego?\n A) Minimalizm\n B) Impresjonizm\n C) Dadaizm\n D) Ekspresjonizm",
-        "Co szczególnie przeraża Indianę Jonesa?\n A) łodzie\n B) węże\n C) pająki\n D) krokodyle",
-        "Do czego służy akwalung?\n A) do latania\n B) szybszego wypijania płynów\n C) oddychania pod wodą\n D) nawoływania kaczek",
-        "W którym roku wybuchła wojna koreańska?\n A) 1948\n B) 1969\n C) 1950\n D) 1958",
-        "Wadery to nieprzemakalne buty:\n A) połączone z kapeluszem\n B) z wilczej skóry\n C) połączone ze spodniami\n D) na koturnach",
-        "W jakim mieście toczy się akcja filmu “Ghostbusters”?\n A) w San Francisco\n B) w Chicago\n C) w Londynie\n D) w Nowym Jorku",
+        "Jak Shakespear nazywa pierwszy akt w “Cały Świat to Scena?",
+        "Monet, Renior i Degas, wszyscy należeli do którego ruchu artystycznego?",
+        "Co szczególnie przeraża Indianę Jonesa?",
+        "Do czego służy akwalung?",
+        "W którym roku wybuchła wojna koreańska?",
+        "Wadery to nieprzemakalne buty:",
+        "W jakim mieście toczy się akcja filmu “Ghostbusters”?",
     ]
-    answer_base_hard = ["b", "b", "b", "c", "c", "c", "d"]
+    question_answer_base_hard = [
+        ["A) Podeszły wiek", "B) Dzieciństwo", "C) Dojrzałość", "D) Dorosłość"],
+        ["A) Minimalizm", "B) Impresjonizm", "C) Dadaizm", "D) Ekspresjonizm"],
+        ["A) łodzie", "B) węże", "C) pająki", "D) krokodyle"],
+        ["A) do latania", "B) szybszego wypijania płynów", "C) oddychania pod wodą", "D) nawoływania kaczek"],
+        ["A) 1948", "B) 1969", "C) 1950", "D) 1958"],
+        ["A) połączone z kapeluszem", "B) z wilczej skóry", "C) połączone ze spodniami", "D) na koturnach"],
+        ["A) w San Francisco", "B) w Chicago", "C) w Londynie", "D) w Nowym Jorku"]]
 
-    ##K: I will add more sentence.
-    small_talk = ["Cieszę się, że mamy możliwość gościć Cię w naszym programie", "Bardzo dobrze Ci idzie.",
-                  "Zbliżamy się do miliona", "Oby tak dalej."]
-
-    print("Witamy w milionerach!")
-
-    ##K: I'm going to add music and dynamic logo.
+    answer_base_hard = [1, 1, 1, 2, 2, 2, 3]
 
     ##K: Basic variables
     def __init__(self):
-        self.stan_konta = 0
-        self.odp = ""
-        self.number_question = 0
-        self.score = 0
-        self.guaranted_cash = 0
-
+        self.loss = False
+        self.last_score = score 
     ##K: This def draw question and choose correct answer from list
 
     def random_question(self):
         ##K: stage easy
-        if self.score == 0 or self.score == 1 or self.score == 2 or self.score == 3:
-            self.random = random.choice(self.question_base_easy)
-            self.position = self.question_base_easy.index(self.random)
-            self.question_ans = self.question_base_easy[self.position]
+        if score >= 0  and score <= 3:
+            self.question = random.choice(self.question_base_easy)
+            self.position = self.question_base_easy.index(self.question)
             self.answer_ans = self.answer_base_easy[self.position]
         ##K: stage med
-        if self.score == 4 or self.score == 5 or self.score == 6 or self.score == 7:
-            self.random = random.choice(self.question_base_medium)
-            self.position = self.question_base_medium.index(self.random)
-            self.question_ans = self.question_base_medium[self.position]
+        elif score >= 4  and score <= 7:
+            self.question = random.choice(self.question_base_medium)
+            self.position = self.question_base_medium.index(self.question)
             self.answer_ans = self.answer_base_medium[self.position]
         ##K: stage_hard
-        if self.score == 8 or self.score == 9 or self.score == 10 or self.score == 11:
-            self.random = random.choice(self.question_base_hard)
-            self.position = self.question_base_hard.index(self.random)
-            self.question_ans = self.question_base_hard[self.position]
+        elif score >= 8  and score <= 11:
+            self.question = random.choice(self.question_base_hard)
+            self.position = self.question_base_hard.index(self.question)
             self.answer_ans = self.answer_base_hard[self.position]
 
-    ##K: Introduction to the game
-    def interview(self):
-        print("Proszę przedstaw nam się!")
-        self.name = input("Mam na imię: ")
-        print("Miło Cię poznać", self.name)
-        print("Czy jesteś gotowy rozpoczać grę o MILION złotych?")
-        com = input()
-        print("Jeśli", com, ", to zaczynajmy!")
+    def questionFunction(self):
+        global number_question
+        number_question = number_question + 1
 
-    ##K: This def counts questions and print random question
-    def question(self):
-        self.number_question += 1
-        print("Oto", self.number_question, "pytanie.")
-        time.sleep(0.5)
-        return print(self.question_ans)
+    def check_answer(self,ans):
+        global score
+        if self.answer_ans == ans:
+            self.last_score = score
+            score = score + 1
+        elif self.answer_ans != ans:
+            self.loss = True
 
-    ##K: In this def user give an answer
-    def answer(self):
-        self.odp = input("Podaj odpowiedź: \n").lower()
-        time.sleep(0.5)
-        print("Czy jesteś pewny swojej odpowiedzi, jest ona definitywna?")
-        self.response = input()
-        ##K: I must change this IF.
-        if self.response == "tak":
-            print("")
-
-    ##K: This def check if the users answer is correct.
-    ##K: First IF is for correct answers.
-    def check_answer(self):
-        if self.answer_ans == self.odp:
-            self.score += 1
-            time.sleep(1)
-            print("Znakomicie,", self.number_question, "pytanie za nami.")
-        ##K: Second IF is for incorrect answers.
-        if self.answer_ans != self.odp:
-            time.sleep(0.5)
-            print("To nie była prawidłowa odpowiedź, gdybyś wybrał/a odpowiedź:", self.answer_ans.upper(),
-                  "- To nasz przygoda trwałaby dłużej. ")
-            print("Niestety to koniec naszej gry, spróbuj ponownie!")
-            print("Twoja wygrana wynosi:", self.guaranted_cash)
-            sys.exit(0)
-
-        small_talk_random = random.randint(0, 2)
-        if small_talk_random == 1:
-            print(random.choice(self.small_talk))
-
-    ##K: This def add cash for user and print informations about guarantee point and account balance.
     def bank(self):
-        if self.score == 1:
-            self.stan_konta = "500"
-        if self.score == 2:
-            self.stan_konta = "1000"
-            self.guaranted_cash = 1000
-            print("Masz już zagwarantowane 1000 zł, oby tak dalej!")
-        if self.score == 3:
-            self.stan_konta = "2000"
-        if self.score == 4:
-            self.stan_konta = "5000"
-        if self.score == 5:
-            self.stan_konta = "10 000"
-        if self.score == 6:
-            self.stan_konta = "20 000"
-        if self.score == 7:
-            self.stan_konta = "40 000"
-            self.guaranted_cash = 40000
-            print("Zagwarantowane 40000 zł, stało się właśnie Twoją własnością!")
-        if self.score == 8:
-            self.stan_konta = "75 000"
-        if self.score == 9:
-            self.stan_konta = "125 000"
-        if self.score == 10:
-            self.stan_konta = "250 000"
-        if self.score == 11:
-            self.stan_konta = "500 000"
-        if self.score == 12:
-            self.stan_konta = "1 000 000"
-            self.guaranted_cash = 1000000
-            print("Gratulacje!", self.name.upper(), "jesteś MILIONEREM!")
-        print("Obecnia na swoim koncie masz", self.stan_konta, "zł.")
+        global stan_konta
+        global nagrody
+        global guaranted_cash
+        stan_konta = nagrody[score]
+        if score == 2:
+            guaranted_cash = "1000$"
+        elif score == 7:
+            guaranted_cash = "40 000$"
+        elif score == 12:
+            guaranted_cash = "1 000 000$"
 
-    ## This def remove questions and answers in basic lists.
     def question_remove(self):
-        if self.score == 0 or self.score == 1 or self.score == 2 or self.score == 3:
+        if self.last_score >= 0  and self.last_score <= 3:
             self.question_base_easy.remove(self.question_base_easy[self.position])
+            del self.question_answer_base_easy[self.position]
             self.answer_base_easy.remove(self.answer_base_easy[self.position])
 
-        if self.score == 4 or self.score == 5 or self.score == 6 or self.score == 7:
+        if self.last_score >= 4  and self.last_score <= 7:
             self.question_base_medium.remove(self.question_base_medium[self.position])
+            del self.question_answer_base_medium[self.position]
             self.answer_base_medium.remove(self.answer_base_medium[self.position])
 
-        if self.score == 8 or self.score == 9 or self.score == 10 or self.score == 11:
+        if self.last_score >= 8  and self.last_score <= 11:
             self.question_base_hard.remove(self.question_base_hard[self.position])
+            del self.question_answer_base_hard[self.position]
             self.answer_base_hard.remove(self.answer_base_hard[self.position])
 
-    ##K: Lifebuoy: audience
-    def audience(self):
-        self.results = []
-        self.base = ("a", "b", "c", "d")
-        self.o = 0
-        self.percent = 50
-        self.part1 = random.randrange(self.percent)
-        self.percent -= self.part1
-        self.results.append(self.part1)
-        self.results.append(self.percent)
-
-        self.percent2 = 50
-        self.part2 = random.randrange(self.percent2)
-        self.percent2 -= self.part2
-        self.results.append(self.part2)
-        self.results.append(self.percent2)
-        self.results.sort()
-
-        for i in self.results:
-
-            if i == max(self.results):
-                time.sleep(1)
-                print("Odpowiedź", self.answer_ans.upper(), "-", i, "%")
-                self.base = list(self.base)
-                self.base.remove(self.answer_ans)
-                self.results.remove(i)
-                self.base = tuple(self.base)
-                for i in range(len(self.base)):
-                    time.sleep(1)
-                    print("Odpowiedź", self.base[i].upper(), "-", self.results[self.o], "%")
-                    self.o += 1
-                    
-
-
-##K: Class which dispaly user menu.
-class player_menu(mechanizm):
-
-    def menu_player(self):
-        print("")
-
-    def user_decision(self):
-        print("")
-        print(" Aby kontynuować i podać odpowiedź kliknij 'x'\n", "Aby zakończyć klinij 'e'\n",
-              "Jeśli chcesz z korzystać z kół ratunkowych kliknij 'o")
-        button = input()
-        if button == "e":
-            print("Dziękujemy za udział w naszym teleturnieju twoja wygrana wynosi:", self.guaranted_cash, "zł.")
-            sys.exit(0)
-        if button == "o":
-            print("Aby spytać publiczność o ich intuicję kliknij '1'")
-            self.byb = int(input())
-            if self.byb == 1:
-                gracz.audience()
-
-
-gracz = mechanizm()
-gracz = player_menu()
-gracz.interview()
-
-while True:
-    gracz.random_question()
-    gracz.question()
-    gracz.user_decision()
-    gracz.answer()
-    gracz.check_answer()
-    gracz.bank()
-    gracz.question_remove()
-
-
-
+    def scoreCheck(self):
+        return score
+    def stan_kontaCheck(self):
+        return stan_konta
+    def number_questionChcek(self):
+        return number_question
+    def guaranted_cashCheck(self):
+        return guaranted_cash
+    def answerCheck(self):
+        return self.answer_ans
 
 
