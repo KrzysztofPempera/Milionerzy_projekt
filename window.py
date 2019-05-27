@@ -99,7 +99,7 @@ class Window(Frame):
         self.winning_score_screen_label.place(x=200, y= 200)
         
 
-        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=  self.windowExit())
         self.quit_button.pack(side=BOTTOM)
 
     def loosingScreen(self,master):     ##method which shows ending screen after players loss
@@ -127,29 +127,29 @@ class Window(Frame):
 
         
 
-        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command =  self.windowExit())
         self.quit_button.pack(side=BOTTOM)
 
     def initButtons(self,master):       ##method to create buttons 
-        self.A_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.answerButtonClick(master,0) )
+        self.A_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,0) )
         self.A_button.place(x=50, y=125, width=225, height=75,)
     
-        self.B_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.answerButtonClick(master,1))
+        self.B_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,1))
         self.B_button.place(x=325, y=125, width=225, height=75,)
 
-        self.C_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.answerButtonClick(master,2))
+        self.C_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,2))
         self.C_button.place(x=50, y=225, width=225, height=75,)
 
-        self.D_button = Button(master, text="NICE",  bg="lightblue",command=lambda: self.answerButtonClick(master,3))
+        self.D_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,3))
         self.D_button.place(x=325, y=225, width=225, height=75,)
         
-        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button,"red")])
+        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=[self.changeButtonStyle(self.phone_button,"red")])
         self.phone_button.place(x=50, y=450, width=200, height=75,)
     
-        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red")])
+        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=[self.changeButtonStyle(self.public_button,"red")])
         self.public_button.place(x=275, y=450, width=200, height=75,)
 
-        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button,"red")])
+        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=[self.changeButtonStyle(self.fifty_button,"red")])
         self.fifty_button.place(x=500, y=450, width=200, height=75,)
         
     def initScoreScreen(self,master):       ##method to create score screen
@@ -167,7 +167,6 @@ class Window(Frame):
        exit()
 
 
-temp1 = "TEMP BUTTON"
 root = Tk()
 root.geometry("800x600")
 root.resizable(0, 0)
