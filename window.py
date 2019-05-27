@@ -16,12 +16,12 @@ class Window(Frame):
         self.question_tag_label = Label(master,font=("TimesNewRoman",20),text ="Pytanie nr")        ##definig question frame and question tag
         self.question_tag_number = Label(master,font=("TimesNewRoman",20),text ="")
 
-        self.question_frame.place(x= 50,y=40,width = 700)                
+        self.question_frame.place(x= 50,y=40,width = 700)
         self.question_tag_label.place(x= 323,y=0)       ##placing question frame and test? note
         self.question_tag_number.place(x= 450,y=0)
 
-        self.question_frame.configure(state="disabled", disabledbackground="white", disabledforeground="black")      ##disabling question frame edit and setting proporties       
-        
+        self.question_frame.configure(state="disabled", disabledbackground="white", disabledforeground="black")      ##disabling question frame edit and setting proporties
+
 
         self.initButtons(master)        ##calling method to create buttons
         self.initScoreScreen(master)        ##calling method to create score frames
@@ -40,10 +40,10 @@ class Window(Frame):
         self.prize_value.config(text=engine.stan_kontaCheck())
         self.guaranteed_prize_value.config(text = engine.guaranted_cashCheck())
 
-    def questionTagNumberEdit(self,question_tag_number_change):     #changing question indicator 
+    def questionTagNumberEdit(self,question_tag_number_change):     #changing question indicator
         self.question_tag_number.config(text=question_tag_number_change)
 
-    def answerButtonClick(self,master,ans):        ##method setting up answer button mechanics and looping game 
+    def answerButtonClick(self,master,ans):        ##method setting up answer button mechanics and looping game
         engine.check_answer(ans)
         if (engine.loss == True):
             self.loosingScreen(master)
@@ -70,15 +70,15 @@ class Window(Frame):
             self.A_button.config(text =engine.question_answer_base_hard[engine.position][0])
             self.B_button.config(text =engine.question_answer_base_hard[engine.position][1])
             self.C_button.config(text =engine.question_answer_base_hard[engine.position][2])
-            self.D_button.config(text =engine.question_answer_base_hard[engine.position][3])  
+            self.D_button.config(text =engine.question_answer_base_hard[engine.position][3])
 
-    def changeButtonStyle(self,button_change,colour):        ##method to change button appearance via button press        
+    def changeButtonStyle(self,button_change,colour):        ##method to change button appearance via button press
         button_change.config(bg = colour)
 
     def questionFrameEdit(self,question_frame_change):      ##method to change question frame text via button press
         self.question_frame.configure(state="normal")        ##unlocking question frame
         self.question_frame.delete(0,END)                    ##deleting whats inside
-        self.question_frame.insert(0,question_frame_change)  ##inserting new text      
+        self.question_frame.insert(0,question_frame_change)  ##inserting new text
         self.question_frame.configure(state="disabled")      ##locking question frame
 
     def winningScreen(self,master):     ##method which shows ending screen after player wins
@@ -97,9 +97,9 @@ class Window(Frame):
 
         self.winning_score_screen_label = Label(master,font=("TimesNewRoman",25),text ="GRATULACJE\n WYGRAŁEŚ 1 000 000$")
         self.winning_score_screen_label.place(x=200, y= 200)
-        
 
-        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=  self.windowExit())
+
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
         self.quit_button.pack(side=BOTTOM)
 
     def loosingScreen(self,master):     ##method which shows ending screen after players loss
@@ -118,40 +118,40 @@ class Window(Frame):
 
         self.loosing_score_screen_frame = LabelFrame(master,font =("TimesNewRoman",25),text = "Przegrałeś")
         self.loosing_score_screen_frame.place(x=150, y=100,width=500,height = 300)
-        
+
         self.loosing_score_screen = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text ="Otrzymujesz nagrodę w wyskokości:")      ##displaying engines score
         self.loosing_score_screen.pack(side=TOP)
 
         self.loosing_score_screen_price = Label(self.loosing_score_screen_frame,font=("TimesNewRoman",15),text =engine.guaranted_cashCheck())
         self.loosing_score_screen_price.pack(side=TOP)
 
-        
 
-        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command =  self.windowExit())
+
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
         self.quit_button.pack(side=BOTTOM)
 
-    def initButtons(self,master):       ##method to create buttons 
-        self.A_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,0) )
+    def initButtons(self,master):       ##method to create buttons
+        self.A_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.answerButtonClick(master,0) )
         self.A_button.place(x=50, y=125, width=225, height=75,)
-    
-        self.B_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,1))
+
+        self.B_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.answerButtonClick(master,1))
         self.B_button.place(x=325, y=125, width=225, height=75,)
 
-        self.C_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,2))
+        self.C_button = Button(master, text=temp1,  bg="lightblue",command=lambda: self.answerButtonClick(master,2))
         self.C_button.place(x=50, y=225, width=225, height=75,)
 
-        self.D_button = Button(master,  bg="lightblue",command= self.answerButtonClick(master,3))
+        self.D_button = Button(master, text="NICE",  bg="lightblue",command=lambda: self.answerButtonClick(master,3))
         self.D_button.place(x=325, y=225, width=225, height=75,)
-        
-        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=[self.changeButtonStyle(self.phone_button,"red")])
+
+        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button,"red")])
         self.phone_button.place(x=50, y=450, width=200, height=75,)
-    
-        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=[self.changeButtonStyle(self.public_button,"red")])
+
+        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red")])
         self.public_button.place(x=275, y=450, width=200, height=75,)
 
-        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=[self.changeButtonStyle(self.fifty_button,"red")])
+        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button,"red")])
         self.fifty_button.place(x=500, y=450, width=200, height=75,)
-        
+
     def initScoreScreen(self,master):       ##method to create score screen
         self.prize_value_frame = LabelFrame(master,font =("TimesNewRoman",10),text = "Pytanie za: ")
         self.prize_value_frame.place(x= 600, y =125,width = 175)
@@ -167,6 +167,7 @@ class Window(Frame):
        exit()
 
 
+temp1 = "TEMP BUTTON"
 root = Tk()
 root.geometry("800x600")
 root.resizable(0, 0)
@@ -174,10 +175,3 @@ root.resizable(0, 0)
 engine = mechanizm()
 app = Window(root)
 root.mainloop()
-
-
-
-
-
-
-
