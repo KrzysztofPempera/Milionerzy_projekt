@@ -1,6 +1,5 @@
 from tkinter import *
 from engine_ import *
-from basic_var import *
 import random
 
 ##main interface class

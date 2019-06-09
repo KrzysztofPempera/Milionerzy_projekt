@@ -1,7 +1,6 @@
 ##tomorrow, I will add comments and do little changes
 import random
 import sys
-from basic_var import *
 
 class mechanizm():
     ## answers must be sorted from a to d, so questions too.
@@ -64,50 +63,50 @@ class mechanizm():
 
     ##K: Basic variables
     def __init__(self):
+        self.nagrody = ["500$","1000$","2000$","5000$","10 000$","20 000$","40 000$","75 000$","125 000$","250 000$","500 000$","1 000 000$"]
+        self.stan_konta = "500$"
+        self.number_question = 0
+        self.score = 0
+        self.guaranted_cash = "0$"
         self.loss = False
-        self.last_score = score 
+        self.last_score = self.score 
     ##K: This def draw question and choose correct answer from list
 
     def random_question(self):
         ##K: stage easy
-        if score >= 0  and score <= 3:
+        if self.score >= 0  and self.score <= 3:
             self.question = random.choice(self.question_base_easy)
             self.position = self.question_base_easy.index(self.question)
             self.answer_ans = self.answer_base_easy[self.position]
         ##K: stage med
-        elif score >= 4  and score <= 7:
+        elif self.score >= 4  and self.score <= 7:
             self.question = random.choice(self.question_base_medium)
             self.position = self.question_base_medium.index(self.question)
             self.answer_ans = self.answer_base_medium[self.position]
         ##K: stage_hard
-        elif score >= 8  and score <= 11:
+        elif self.score >= 8  and self.score <= 11:
             self.question = random.choice(self.question_base_hard)
             self.position = self.question_base_hard.index(self.question)
             self.answer_ans = self.answer_base_hard[self.position]
 
     def questionFunction(self):
-        global number_question
-        number_question = number_question + 1
+        self.number_question = self.number_question + 1
 
     def check_answer(self,ans):
-        global score
         if self.answer_ans == ans:
-            self.last_score = score
-            score = score + 1
+            self.last_score = self.score
+            self.score = self.score + 1
         elif self.answer_ans != ans:
             self.loss = True
 
     def bank(self):
-        global stan_konta
-        global nagrody
-        global guaranted_cash
-        stan_konta = nagrody[score]
-        if score == 2:
-            guaranted_cash = "1000$"
-        elif score == 7:
-            guaranted_cash = "40 000$"
-        elif score == 12:
-            guaranted_cash = "1 000 000$"
+        self.stan_konta = self.nagrody[self.score]
+        if self.score == 2:
+            self.guaranted_cash = "1000$"
+        elif self.score == 7:
+            self.guaranted_cash = "40 000$"
+        elif self.score == 12:
+            self.guaranted_cash = "1 000 000$"
 
     def question_remove(self):
         if self.last_score >= 0  and self.last_score <= 3:
@@ -126,13 +125,13 @@ class mechanizm():
             self.answer_base_hard.remove(self.answer_base_hard[self.position])
 
     def scoreCheck(self):
-        return score
+        return self.score
     def stan_kontaCheck(self):
-        return stan_konta
+        return self.stan_konta
     def number_questionChcek(self):
-        return number_question
+        return self.number_question
     def guaranted_cashCheck(self):
-        return guaranted_cash
+        return self.guaranted_cash
     def answerCheck(self):
         return self.answer_ans
 
