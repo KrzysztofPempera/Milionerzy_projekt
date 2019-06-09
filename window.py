@@ -98,7 +98,7 @@ class Window(Frame):
         self.winning_score_screen_label.place(x=200, y= 200)
 
 
-        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=  self.windowExit)
         self.quit_button.pack(side=BOTTOM)
 
     def loosingScreen(self,master):     ##method which shows ending screen after players loss
@@ -126,7 +126,7 @@ class Window(Frame):
 
 
 
-        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=lambda:  self.windowExit())
+        self.quit_button = Button(master, text="EXIT", height = 5, width = 10 ,bg="lightgrey",command=  self.windowExit)
         self.quit_button.pack(side=BOTTOM)
 
     def initButtons(self,master):       ##method to create buttons
