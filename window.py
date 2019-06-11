@@ -21,6 +21,7 @@ class Window(Frame):
 
         self.question_frame.configure(state="disabled", disabledbackground="white", disabledforeground="black")      ##disabling question frame edit and setting proporties
 
+        self.fifty_used = False
 
         self.initButtons(master)        ##calling method to create buttons
         self.initScoreScreen(master)        ##calling method to create score frames
@@ -32,8 +33,10 @@ class Window(Frame):
 
         self.questionFrameEdit(engine.question)
         self.questionTagNumberEdit(engine.number_questionChcek()+1)
+        self.buttonReplace()
         self.scoreScreenSet()
         self.answerButtonSet()
+
 
     def scoreScreenSet(self):       ##setting score screen
         self.prize_value.config(text=engine.stan_kontaCheck())
@@ -148,7 +151,7 @@ class Window(Frame):
         self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red")])
         self.public_button.place(x=275, y=450, width=200, height=75,)
 
-        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button,"red")])
+        self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button,"red"),self.fiftyLifeline()])
         self.fifty_button.place(x=500, y=450, width=200, height=75,)
 
     def initScoreScreen(self,master):       ##method to create score screen
@@ -161,6 +164,43 @@ class Window(Frame):
         self.guaranteed_prize_value_frame.place(x= 600, y =200,width = 175)
         self.guaranteed_prize_value = Label(self.guaranteed_prize_value_frame,font=("TimesNewRoman",15))
         self.guaranteed_prize_value.pack()
+
+    def buttonReplace(self):
+        self.A_button.place(x=50, y=125, width=225, height=75,)
+        self.B_button.place(x=325, y=125, width=225, height=75,)
+        self.C_button.place(x=50, y=225, width=225, height=75,)
+        self.D_button.place(x=325, y=225, width=225, height=75,)
+    
+    '''
+    def buttonTest(self,master):
+        self.test_button = Button(master, text=temp1,  bg="lightblue",command = self.A_button.place_forget)
+        self.test_button.place(x=150, y=300, width=225, height=75,) 
+    '''
+
+    def fiftyLifeline(self):
+        if self.fifty_used == True:
+            print("used")
+        elif self.fifty_used == False:
+            self.hideButtons(engine.answer_ans)
+            self.fifty_used = True
+
+    def hideButtons(self,ans):
+        self.button_list = [self.A_button,self.B_button,self.C_button,self.D_button]
+
+        if ans == 0:
+            self.button_list.remove(self.A_button)
+        elif ans == 1:
+            self.button_list.remove(self.B_button)
+        elif ans == 2:
+            self.button_list.remove(self.C_button)
+        elif ans == 3:
+            self.button_list.remove(self.D_button)
+
+        self.temp = random.choice(self.button_list)
+        self.temp.place_forget()
+        self.button_list.remove(self.temp)
+        self.temp = random.choice(self.button_list)
+        self.temp.place_forget()
 
     def windowExit(self):       ##method which exits the game
        exit()
