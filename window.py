@@ -241,11 +241,36 @@ class Window(Frame):
        exit()
 
 
+class splashScreen(Frame):
+
+    def __init__(self, master):
+        Frame.__init__(self, master)                 
+        self.master = master
+        
+        przycisk_start = Button(master, text = "START",command =lambda: [self.quit(),self.start()])
+        przycisk_start.place(x= 100,y=175,width =200, height = 75)
+
+    def start(self):
+        self.root = Tk()
+        self.root.geometry("800x600")
+        self.root.resizable(0, 0)
+        self.app = Window(self.root)
+        self.root.mainloop()
+    def quit(self):
+        self.master.destroy()
+
+
+   
+    
+       
+    
 temp1 = "TEMP BUTTON"
-root = Tk()
-root.geometry("800x600")
-root.resizable(0, 0)
 
 engine = mechanizm()
-app = Window(root)
-root.mainloop()
+
+glowne_okno = Tk()
+glowne_okno.title("Moje okno")
+glowne_okno.geometry("400x300")
+app2 = splashScreen(glowne_okno)
+
+glowne_okno.mainloop()
