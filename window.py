@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from engine_ import *
 import random
 
@@ -22,6 +23,7 @@ class Window(Frame):
         self.question_frame.configure(state="disabled", disabledbackground="white", disabledforeground="black")      ##disabling question frame edit and setting proporties
 
         self.fifty_used = False
+        self.phone_used = False
 
         self.initButtons(master)        ##calling method to create buttons
         self.initScoreScreen(master)        ##calling method to create score frames
@@ -145,7 +147,7 @@ class Window(Frame):
         self.D_button = Button(master, text="NICE",  bg="lightblue",command=lambda: self.answerButtonClick(master,3))
         self.D_button.place(x=325, y=225, width=225, height=75,)
 
-        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button,"red")])
+        self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button,"red"),self.phoneLifeline()])
         self.phone_button.place(x=50, y=450, width=200, height=75,)
 
         self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red")])
@@ -184,9 +186,25 @@ class Window(Frame):
             self.hideButtons(engine.answer_ans)
             self.fifty_used = True
 
+    def phoneLifeline(self):
+        self.button_list = ["odpowiedź A","odpowiedź B","odpowiedź C","odpowiedź D"]
+
+        if self.phone_used == True:
+            print("used")
+        elif self.phone_used == False:
+            correct_chance = random.randint(0,100)
+            if correct_chance >40:
+                self.temp = "Moim zdaniem "+self.button_list[engine.answer_ans]+" jest poprawna"
+                messagebox.showinfo("Telefon do przyjaciela",self.temp)
+
+            elif correct_chance <40:
+                self.temp = "Moim zdaniem "+self.button_list[random.randint(0,3)]+" jest poprawna"
+                messagebox.showinfo("Telefon do przyjaciela",self.temp)
+
+            self.phone_used = True
+
     def hideButtons(self,ans):
         self.button_list = [self.A_button,self.B_button,self.C_button,self.D_button]
-
         if ans == 0:
             self.button_list.remove(self.A_button)
         elif ans == 1:
