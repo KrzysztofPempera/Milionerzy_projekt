@@ -24,6 +24,7 @@ class Window(Frame):
 
         self.fifty_used = False
         self.phone_used = False
+        self.public_used = False
 
         self.initButtons(master)        ##calling method to create buttons
         self.initScoreScreen(master)        ##calling method to create score frames
@@ -150,7 +151,7 @@ class Window(Frame):
         self.phone_button = Button(master, text="Telefon do przyjaciela",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.phone_button,"red"),self.phoneLifeline()])
         self.phone_button.place(x=50, y=450, width=200, height=75,)
 
-        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red")])
+        self.public_button = Button(master, text="Pytanie do publiczności",  bg="lightblue",command=lambda:[self.changeButtonStyle(self.public_button,"red"),self.publicLifeline()])
         self.public_button.place(x=275, y=450, width=200, height=75,)
 
         self.fifty_button = Button(master, text="50-50",  bg="lightblue", command=lambda:[self.changeButtonStyle(self.fifty_button,"red"),self.fiftyLifeline()])
@@ -202,6 +203,22 @@ class Window(Frame):
                 messagebox.showinfo("Telefon do przyjaciela",self.temp)
 
             self.phone_used = True
+    
+    def publicLifeline(self):
+        if self.public_used == True:
+            print("used")
+        elif self.public_used == False:
+            self.percentage = 100
+            self.public_answer = []
+            for i in range (0,4):
+                self.temporary_percentage = random.randrange(self.percentage)
+                self.public_answer.append(str(self.temporary_percentage))
+                self.percentage = self.percentage - self.temporary_percentage
+
+            self.temp = self.public_answer[0]+"% publiczności twierdzi,że odpowiedź A jest prawidłowa\n"+self.public_answer[1]+"% publiczności twierdzi,że odpowiedź B jest prawidłowa\n"+self.public_answer[2]+"% publiczności twierdzi,że odpowiedź C jest prawidłowa\n"+self.public_answer[3]+"% publiczności twierdzi,że odpowiedź D jest prawidłowa\n"
+            messagebox.showinfo("Pytanie do publiczności",self.temp)
+            
+            self.public_used = True
 
     def hideButtons(self,ans):
         self.button_list = [self.A_button,self.B_button,self.C_button,self.D_button]
