@@ -1,4 +1,6 @@
-##tomorrow, I will add comments and do little changes
+##K: new comments and changes in lifebuoy "phone-a-friend"
+##K: All lifebuoys are independent of each other, variables too.
+##K: So you can use eg. only one of them
 import random
 import sys
 import time
@@ -235,9 +237,9 @@ class mechanizm():
         time.sleep(3)
         self.yes = "Hmm, nie jestem pewien ale wydaje mi się, że " + self.answer_ans.upper()
         self.no = "Najbardziej skłaniałbym się do odpowiedzi: " + self.next2.upper() + ", ja rzadko się mylę."
-        if self.los2 > 3:
+        if self.los2 > 4:
             print (self.yes)
-        if self.los2 <= 3:
+        if self.los2 <= 4:
             print(self.no)
         time.sleep(2)
         print("Dziękujemy za pomoc, oby była ona trafna.")
